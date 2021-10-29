@@ -32,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'client_id',
-            'created_at',
-            'updated_at',
+            'created_at:Datetime',
+            'updated_at:Datetime',
         ],
     ]) ?>
 

@@ -4,6 +4,7 @@ use yii\i18n\Formatter;
 use kartik\datecontrol\Module;
 
 return [
+    'timeZone' => 'America/Recife',
 
     'controllerMap' => [
         'seeder' => [

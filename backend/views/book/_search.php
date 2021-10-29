@@ -22,15 +22,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'title') ?>
 
-    <?= $form->field($model, 'author_book') ?>
+    <?= $form->field($model, 'author_id') ?>
 
     <?= $form->field($model, 'launch_date') ?>
 
-    <?= $form->field($model, 'genre_book') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
+   
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

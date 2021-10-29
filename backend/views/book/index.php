@@ -35,8 +35,8 @@ $this->params['breadcrumbs'][] = $this->title;
                      return 'titulo:'.$model -> title;
                  }
              ] ,
-            'author_book',
-            'genre_book',
+            'author_id',
+          
             
                         //'created_at',
                         //'updated_at',

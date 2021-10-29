@@ -14,10 +14,10 @@ class m211020_044942_create_book_table extends Migration
     {
         $this->createTable('{{%book}}', [
             'id' => $this->primaryKey(),
-            'title' => $this->string(15),
-            'author_book' => $this->string(22)->notNull(),
+            'title' => $this->string(40),
+            'author_id' => $this->integer()->notNull(),
             'launch_date' => $this->integer()->notNull(),
-            'genre_book' => $this->string()->notNull(),
+            'genre_id' => $this->string()->notNull(),
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
         ]);

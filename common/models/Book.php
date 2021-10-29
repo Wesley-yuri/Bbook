@@ -2,8 +2,10 @@
 
 namespace common\models;
 
+use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
+use yii\base\Behavior;
 use Yii;
 
 /**
@@ -13,7 +15,7 @@ use Yii;
  * @property string|null $title
  * @property string $author_book
  * @property int $launch_date
- * @property string $genre_book
+ * @property string $genre_book_id
  * @property int $created_at
  * @property int $updated_at
  *
@@ -22,6 +24,62 @@ use Yii;
  */
 class Book extends ActiveRecord
 {
+
+
+    public  $genreMultiple = [];
+
+    public function behaviors(){
+    
+    // return
+    // [
+    //     'timestamp' => [
+    //         'class' => TimestampBehavior::class
+    //     ]
+    // ]
+
+
+
+
+
+    return [
+        [
+            
+            'class' => ManyToManyBehavior::className(),
+            'relations' => [
+                [
+                    'editableAttribute' => 'genreMultiple', // Editable attribute name
+                    'table' => 'genre_book', // Name of the junction table
+                    'ownAttribute' => 'book_id', // Name of the column in junction table that represents current model
+                    'relatedModel' => Genre::class, // Related model class
+                    'relatedAttribute' => 'genre_id', // Name of the column in junction table that represents related model
+                ],
+            ],
+        ],
+        
+            'timestamp' => [
+                'class' => TimestampBehavior::class
+            ]
+        
+    ];
+
+
+
+
+}
+
+
+
+
+
+
+/**
+ * @inheritdoc
+ */
+
+// 
+
+
+
     /**
      * {@inheritdoc}
      */
@@ -31,14 +89,7 @@ class Book extends ActiveRecord
     }
 
 
-    
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::class,
-        ];
-    }
-
+   
 
     /**
      * {@inheritdoc}
@@ -46,11 +97,13 @@ class Book extends ActiveRecord
     public function rules()
     {
         return [
-            [['author_book', 'launch_date', 'genre_book'], 'required'],
-            [['launch_date', 'created_at', 'updated_at'], 'integer'],
-            [['title'], 'string', 'max' => 15],
-            [['author_book'], 'string', 'max' => 22],
-            [['genre_book'], 'string', 'max' => 255],
+            [['author_id'], 'required'],
+            [['author_id','launch_date', 'created_at', 'updated_at'], 'integer'],
+            [['title'], 'string', 'max' => 40],
+            //[[], 'string', 'max' => 30],
+            //[[''], 'string', 'max' => 255],
+
+            ['genreMultiple', 'each','skipOnEmpty'=> false, 'rule' => ['exist', 'skipOnError' => true, 'targetClass' => Genre::className(), 'targetAttribute' => ['genreMultiple' => 'id']]],
         ];
     }
 
@@ -62,9 +115,9 @@ class Book extends ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'author_book' => 'Author Book',
+            'author_id' => 'Author',
             'launch_date' => 'Launch Date',
-            'genre_book' => 'Genre Book',
+            'genreMultiple' => 'Genre from book',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

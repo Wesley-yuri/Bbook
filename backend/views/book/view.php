@@ -31,12 +31,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'title',
-            'author_book',
+            'author_id',
             'launch_date',
-            'genre_book',
-            'created_at',
-            'updated_at',
+            'created_at:Datetime',
+            'updated_at:Datetime',
+            
         ],
     ]) ?>
-
+   
 </div>

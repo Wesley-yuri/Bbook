@@ -1,6 +1,7 @@
 <?php
 
 namespace common\models;
+use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use arogachev\ManyToMany\behaviors\ManyToManyBehavior;
 use Yii;
@@ -27,6 +28,16 @@ class Order extends ActiveRecord
  */
 public function behaviors()
 {
+
+    
+
+
+    return [
+        TimestampBehavior::class,
+    ];
+
+
+
     return [
         [
             'class' => ManyToManyBehavior::className(),
@@ -79,6 +90,7 @@ public function behaviors()
             'client_id' => 'Client ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'editableUsers' => 'produto',
         ];
     }
 
